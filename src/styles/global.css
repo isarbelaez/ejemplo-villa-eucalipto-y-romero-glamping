@@ -18,6 +18,10 @@
 	--box-shadow-hover: 0 10px 30px rgba(26, 58, 42, 0.12);
 }
 
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
 body {
 	font-family: var(--font-body);
 	margin: 0;

@@ -4,7 +4,7 @@ tipo: suite
 precio: 496000
 jacuzzi: cubierto
 capacidad: 2
-imagen: https://images.unsplash.com/photo-1518733057094-95b5ee2164da?q=80&w=2574&auto=format&fit=crop
+imagen: https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1400&auto=format&fit=crop
 orden: 2
 resumen: Suite entre pinos nativos con jacuzzi cubierto y vistas al bosque.
 destacada: true

@@ -86,7 +86,6 @@
 /* ═══════════════ GALLERY SECTION ═══════════════ */
 .lux-gallery-section {
 	padding: 3.5rem 0 5rem;
-	background-color: var(--color-mist); /* Slightly off-white for contrast with white cards */
 }
 
 .gallery-header {

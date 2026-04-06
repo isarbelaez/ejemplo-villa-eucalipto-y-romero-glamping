@@ -2,8 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
 import AlojamientosSectionReact from '../components/AlojamientosSectionReact.tsx';
-import PlanIncludes from '../components/PlanIncludes.astro';
-import CTAButton from '../components/CTAButton.astro';
+import LuxuryPlanPromo from '../components/LuxuryPlanPromo.astro';
 import { getCollection } from 'astro:content';
 
 const allAlojamientos = await getCollection('alojamientos');
@@ -51,30 +50,8 @@ const heroImage = "https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=8
 		</div>
 	</section>
 
-	<!-- 4. PLANES + INCLUYE + HORARIOS + CTA -->
-	<section class="plans-section section" id="planes">
-		<div class="container">
-			<div class="section-header" data-aos="fade-up">
-				<h2 class="section-title">Planes para parejas</h2>
-				<p class="section-subtitle">2 personas · 1 noche · todo incluido</p>
-			</div>
-
-			<PlanIncludes />
-
-			<div class="booking-cta" data-aos="fade-up">
-				<p class="schedule">⏰ Ingreso desde las 3:00 p.m. &mdash; Salida hasta las 11:00 a.m.</p>
-				<CTAButton
-					text="Reserva tu escapada"
-					href="/ejemplo-villa-eucalipto-y-romero-glamping/reservas"
-					class="cta-large"
-				/>
-				<p class="deposit-notice">
-					Abono de <strong>$100.000</strong> para confirmar tu reserva. El saldo lo cancelas en La Villa
-					en <strong>EFECTIVO</strong>, o puedes ir abonando antes de la fecha.
-				</p>
-			</div>
-		</div>
-	</section>
+	<!-- 4. LUXURY PLANES PROMO -->
+	<LuxuryPlanPromo />
 </MainLayout>
 
 <style>
@@ -101,43 +78,8 @@ const heroImage = "https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=8
 		margin-bottom: 3rem;
 	}
 
-	/* Plans section */
-	.plans-section { background-color: var(--color-cream); }
-
-	.booking-cta {
-		text-align: center;
-		margin-top: 3.5rem;
-		padding: 3rem 2rem;
-		background-color: var(--color-forest);
-		color: var(--color-white);
-		border-radius: 16px;
-	}
-
-	.schedule {
-		font-size: 1.1rem;
-		margin-bottom: 2rem;
-		font-family: var(--font-display);
-		font-style: italic;
-		color: var(--color-gold);
-	}
-
-	.deposit-notice {
-		margin-top: 1.5rem;
-		font-size: 0.88rem;
-		max-width: 540px;
-		margin-left: auto;
-		margin-right: auto;
-		opacity: 0.85;
-	}
-
-	:global(.cta-large) {
-		font-size: 1.05rem !important;
-		padding: 1rem 2.5rem !important;
-	}
-
 	/* Mobile */
 	@media (max-width: 768px) {
 		.section { padding: 3.5rem 0; }
-		.booking-cta { padding: 2rem 1.25rem; }
 	}
 </style>

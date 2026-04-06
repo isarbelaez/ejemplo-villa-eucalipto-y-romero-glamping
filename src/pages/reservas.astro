@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import ReservationForm from '../components/ReservationForm.tsx';
+import ReservationForm from '../components/ReservationForm.astro';
 ---
 
 <MainLayout title="Reservas | Villa Eucalipto Y Romero" description="Reserva tu alojamiento en Villa Eucalipto Y Romero.">
@@ -13,7 +13,7 @@ import ReservationForm from '../components/ReservationForm.tsx';
 			</div>
 			
 			<div class="form-wrapper">
-				<ReservationForm client:load />
+				<ReservationForm />
 			</div>
 		</div>
 	</div>

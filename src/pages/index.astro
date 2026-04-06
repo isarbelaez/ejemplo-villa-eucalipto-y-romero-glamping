@@ -1,49 +1,143 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import AlojamientosSection from '../components/AlojamientosSection.astro';
+import PlanIncludes from '../components/PlanIncludes.astro';
+import CTAButton from '../components/CTAButton.astro';
+import { getCollection } from 'astro:content';
+
+const allAlojamientos = await getCollection('alojamientos');
+allAlojamientos.sort((a, b) => a.data.orden - b.data.orden);
+
+const galleryItems = allAlojamientos.map(a => ({
+	id: a.id,
+	nombre: a.data.nombre,
+	imagen: a.data.imagen,
+	precio: a.data.precio,
+	jacuzzi: a.data.jacuzzi,
+	tipo: a.data.tipo,
+	capacidad: a.data.capacidad,
+	resumen: a.data.resumen,
+	amenidades: a.data.amenidades,
+}));
+
+const heroImage = "https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=80&w=2670&auto=format&fit=crop";
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
+<MainLayout
+	title="Villa Eucalipto Y Romero | Glamping & Cabañas"
+	description="Glamping y cabañas en la naturaleza. Suites con jacuzzi, vistas panorámicas y experiencias de descanso inolvidables."
+>
+	<!-- 1. HERO (full screen) -->
+	<Hero
+		title="Encuentra tu refugio"
+		subtitle="Donde la tranquilidad existe"
+		image={heroImage}
+	/>
+
+	<!-- 2. SEARCH BAR + GALLERY (unified, filter works) -->
+	<AlojamientosSection alojamientos={galleryItems} pageSize={6} />
+
+	<!-- 3. BIENVENIDA -->
+	<section class="welcome section">
+		<div class="container" data-aos="fade-up">
+			<h2 class="section-title">Bienvenida a Villa Eucalipto y Romero</h2>
+			<p class="welcome-text">
+				Nuestra villa está pensada para brindarte una experiencia inolvidable. Cabañas y glampings
+				de lujo integrados con la naturaleza, donde cada detalle ha sido diseñado para tu máximo
+				confort. Desconéctate de la rutina y reconéctate con lo esencial en un ambiente de
+				sofisticación rústica.
 			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+		</div>
+	</section>
+
+	<!-- 4. PLANES + INCLUYE + HORARIOS + CTA -->
+	<section class="plans-section section" id="planes">
+		<div class="container">
+			<div class="section-header" data-aos="fade-up">
+				<h2 class="section-title">Planes para parejas</h2>
+				<p class="section-subtitle">2 personas · 1 noche · todo incluido</p>
+			</div>
+
+			<PlanIncludes />
+
+			<div class="booking-cta" data-aos="fade-up">
+				<p class="schedule">⏰ Ingreso desde las 3:00 p.m. &mdash; Salida hasta las 11:00 a.m.</p>
+				<CTAButton
+					text="Reserva tu escapada"
+					href="/ejemplo-villa-eucalipto-y-romero-glamping/reservas"
+					class="cta-large"
+				/>
+				<p class="deposit-notice">
+					Abono de <strong>$100.000</strong> para confirmar tu reserva. El saldo lo cancelas en La Villa
+					en <strong>EFECTIVO</strong>, o puedes ir abonando antes de la fecha.
+				</p>
+			</div>
+		</div>
+	</section>
+</MainLayout>
+
+<style>
+	.section { padding: 5rem 0; }
+
+	/* Bienvenida */
+	.welcome-text {
+		text-align: center;
+		max-width: 780px;
+		margin: 0 auto;
+		font-size: 1.1rem;
+		line-height: 1.85;
+		color: #555;
+	}
+
+	.section-title { text-align: center; margin-bottom: 0.5rem; }
+
+	.section-subtitle {
+		text-align: center;
+		font-family: var(--font-display);
+		color: var(--color-gold);
+		font-size: 1.3rem;
+		font-style: italic;
+		margin-bottom: 3rem;
+	}
+
+	/* Plans section */
+	.plans-section { background-color: var(--color-cream); }
+
+	.booking-cta {
+		text-align: center;
+		margin-top: 3.5rem;
+		padding: 3rem 2rem;
+		background-color: var(--color-forest);
+		color: var(--color-white);
+		border-radius: 16px;
+	}
+
+	.schedule {
+		font-size: 1.1rem;
+		margin-bottom: 2rem;
+		font-family: var(--font-display);
+		font-style: italic;
+		color: var(--color-gold);
+	}
+
+	.deposit-notice {
+		margin-top: 1.5rem;
+		font-size: 0.88rem;
+		max-width: 540px;
+		margin-left: auto;
+		margin-right: auto;
+		opacity: 0.85;
+	}
+
+	:global(.cta-large) {
+		font-size: 1.05rem !important;
+		padding: 1rem 2.5rem !important;
+	}
+
+	/* Mobile */
+	@media (max-width: 768px) {
+		.section { padding: 3.5rem 0; }
+		.booking-cta { padding: 2rem 1.25rem; }
+	}
+</style>

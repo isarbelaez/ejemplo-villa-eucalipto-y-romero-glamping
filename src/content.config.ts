@@ -2,19 +2,32 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: ({ image }) =>
+const alojamientos = defineCollection({
+	loader: glob({ base: './src/content/alojamientos', pattern: '**/*.{md,mdx}' }),
+	schema: () =>
 		z.object({
-			title: z.string(),
-			description: z.string(),
-			// Transform string to Date object
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
+			nombre: z.string(),
+			tipo: z.enum(['suite', 'glamping', 'cabana']),
+			precio: z.number(),
+			jacuzzi: z.string(),
+			capacidad: z.number().default(2),
+			imagen: z.string(),
+			orden: z.number().default(0),
+			resumen: z.string().optional(),
+			destacada: z.boolean().default(false),
+			amenidades: z.array(z.string()).optional(),
+			galeria: z.array(z.string()).optional(),
 		}),
 });
 
-export const collections = { blog };
+const paginas = defineCollection({
+	loader: glob({ base: './src/content/paginas', pattern: '**/*.{md,mdx}' }),
+	schema: () =>
+		z.object({
+			titulo: z.string(),
+			descripcion: z.string(),
+			imagen: z.string().optional(),
+		}),
+});
+
+export const collections = { alojamientos, paginas };

@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
-import AlojamientosSection from '../components/AlojamientosSection.astro';
+import AlojamientosSectionReact from '../components/AlojamientosSectionReact.tsx';
 import PlanIncludes from '../components/PlanIncludes.astro';
 import CTAButton from '../components/CTAButton.astro';
 import { getCollection } from 'astro:content';
@@ -35,8 +35,8 @@ const heroImage = "https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=8
 		image={heroImage}
 	/>
 
-	<!-- 2. SEARCH BAR + GALLERY (unified, filter works) -->
-	<AlojamientosSection alojamientos={galleryItems} pageSize={6} />
+	<!-- 2. SEARCH BAR + GALLERY (React Interactive Component) -->
+	<AlojamientosSectionReact client:load alojamientos={galleryItems} pageSize={6} />
 
 	<!-- 3. BIENVENIDA -->
 	<section class="welcome section">

@@ -1,85 +1,936 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Hero from '../components/Hero.astro';
-import AlojamientosSectionReact from '../components/AlojamientosSectionReact.tsx';
-import LuxuryPlanPromo from '../components/LuxuryPlanPromo.astro';
-import { getCollection } from 'astro:content';
+import BakeryLayout from "../layouts/BakeryLayout.astro";
+import BakeryHeader from "../components/BakeryHeader.astro";
+import BakeryFooter from "../components/BakeryFooter.astro";
 
-const allAlojamientos = await getCollection('alojamientos');
-allAlojamientos.sort((a, b) => a.data.orden - b.data.orden);
-
-const galleryItems = allAlojamientos.map(a => ({
-	id: a.id,
-	nombre: a.data.nombre,
-	imagen: a.data.imagen,
-	precio: a.data.precio,
-	jacuzzi: a.data.jacuzzi,
-	tipo: a.data.tipo,
-	capacidad: a.data.capacidad,
-	resumen: a.data.resumen,
-	amenidades: a.data.amenidades,
-}));
-
-const heroImage = "https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=80&w=2670&auto=format&fit=crop";
+// Images from Unsplash (Editorial placeholders that work without blocking)
+const imgBread =
+	"https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop";
+const imgCake =
+	"https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop";
+const imgPastries =
+	"https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800&auto=format&fit=crop";
+const imgBreakfast =
+	"https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?q=80&w=800&auto=format&fit=crop";
 ---
 
-<MainLayout
-	title="Villa Eucalipto Y Romero | Glamping & Cabañas"
-	description="Glamping y cabañas en la naturaleza. Suites con jacuzzi, vistas panorámicas y experiencias de descanso inolvidables."
->
-	<!-- 1. HERO (full screen) -->
-	<Hero
-		title="Encuentra tu refugio"
-		subtitle="Donde la tranquilidad existe"
-		image={heroImage}
-	/>
+<BakeryLayout>
+	<BakeryHeader />
 
-	<!-- 2. SEARCH BAR + GALLERY (React Interactive Component) -->
-	<AlojamientosSectionReact client:load alojamientos={galleryItems} pageSize={6} />
+	<main>
+		<!-- SECTION 1: HERO -->
+		<section class="hero-stylized">
+			<div class="wrap hero-flex">
+				<div class="hero-left reveal">
+					<span class="eyebrow">Experiencia danny tortas</span>
+					<h1>
+						Las mejores tortas, <span
+							class="cursive-vino"
+							id="hero-typewriter"></span>
+					</h1>
+					<a
+						href="/ejemplo-villa-eucalipto-y-romero-glamping/pedido"
+						class="hero-cta">PIDE TU TORTA AHORA →</a
+					>
+				</div>
+				<div class="hero-right reveal">
+					<div class="hero-visual">
+						<div class="hero-backdrop-circle"></div>
+						<div class="hero-glow-main"></div>
+						<div class="hero-glow-secondary"></div>
+						<img
+							src="/ejemplo-villa-eucalipto-y-romero-glamping/images/hero-chef-new.png"
+							alt="Chef danny tortas con torta personalizada"
+							class="hero-chef-img-large"
+						/>
+					</div>
+				</div>
+			</div>
+			<!-- Curva de transición -->
+			<div class="hero-wave">
+				<svg
+					viewBox="0 0 1440 80"
+					preserveAspectRatio="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M0,0 C360,80 1080,80 1440,0 L1440,80 L0,80 Z"
+						fill="#5a1111"></path>
+				</svg>
+			</div>
+		</section>
 
-	<!-- 3. BIENVENIDA -->
-	<section class="welcome section">
-		<div class="container" data-aos="fade-up">
-			<h2 class="section-title">Bienvenida a Villa Eucalipto y Romero</h2>
-			<p class="welcome-text">
-				Nuestra villa está pensada para brindarte una experiencia inolvidable. Cabañas y glampings
-				de lujo integrados con la naturaleza, donde cada detalle ha sido diseñado para tu máximo
-				confort. Desconéctate de la rutina y reconéctate con lo esencial en un ambiente de
-				sofisticación rústica.
-			</p>
-		</div>
-	</section>
+		<!-- SECTION 2: VINOTINTO PHRASE -->
+		<section class="philosophy-animated vinotinto-theme">
+			<div class="wrap reveal">
+				<p class="vino-tag">Panadería danny tortas</p>
+				<h2>
+					Nuestra receta es simple:<br /><span
+						>Pasión &amp; Tradición</span>
+				</h2>
+				<p class="vino-sub">
+					Cada pieza cuenta una historia de sabor artesanal.<br
+					/>Desde 1985 horneando felicidad.
+				</p>
+			</div>
+			<!-- Curva inferior vinotinto → delicias -->
+			<div class="vino-wave-bottom">
+				<svg
+					viewBox="0 0 1440 100"
+					preserveAspectRatio="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M0,40 C360,100 1080,0 1440,40 L1440,100 L0,100 Z"
+						fill="#f5ece0"></path>
+				</svg>
+			</div>
+		</section>
 
-	<!-- 4. LUXURY PLANES PROMO -->
-	<LuxuryPlanPromo />
-</MainLayout>
+		<!-- SECTION 3: DELICIAS EDITORIAL -->
+		<section id="delicias" class="editorial-gallery dots-bg">
+			<div class="wrap">
+				<div class="gallery-header reveal">
+					<span class="subtitle">Colección Editorial</span>
+					<h2>Nuestras Delicias</h2>
+				</div>
+
+				<div class="editorial-grid">
+					{
+						[
+							{ title: "Personalizada", img: "/ejemplo-villa-eucalipto-y-romero-glamping/images/personalizda.png" },
+							{ title: "Torta Frias", img: "/ejemplo-villa-eucalipto-y-romero-glamping/images/fria.png" },
+							{ title: "Ponques", img: "/ejemplo-villa-eucalipto-y-romero-glamping/images/ponques.png" },
+							{
+								title: "Tortas en tendencia",
+								img: "/ejemplo-villa-eucalipto-y-romero-glamping/images/tendencia.png",
+							},
+						].map((item, i) => (
+							<article
+								class={`editorial-card reveal card-shape-${i % 2 === 0 ? "a" : "b"}`}
+							>
+								<div class="img-wrapper">
+									<img src={item.img} alt={item.title} />
+									<div class="overlay">
+										<a
+											href="/ejemplo-villa-eucalipto-y-romero-glamping/pedido"
+											class="view-btn"
+										>
+											Pedir ahora
+										</a>
+									</div>
+								</div>
+								<div class="card-footer">
+									<h3>{item.title}</h3>
+									<a
+										href="/ejemplo-villa-eucalipto-y-romero-glamping/pedido"
+										class="pedir-inline"
+									>
+										Pedir ahora →
+									</a>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 4: CURVY IMAGE SECTION -->
+		<section class="special-moment">
+			<div class="wrap grid-2">
+				<div class="text-side reveal">
+					<h2>
+						Y si disfrutas<br /><span>las mejores tortas...</span>
+					</h2>
+					<p>
+						Creamos momentos dulces que permanecen en tu memoria.
+						Diseños únicos elaborados con los ingredientes más
+						finos.
+					</p>
+
+					<!-- Animated typewriter buttons -->
+					<div class="typewriter-btn-wrapper">
+						<a
+							href="/ejemplo-villa-eucalipto-y-romero-glamping/pedido"
+							class="btn-cursiva"
+							id="typewriter-btn"
+							aria-live="polite"></a>
+					</div>
+				</div>
+				<div class="visual-side reveal">
+					<div class="curvy-frame">
+						<img src={imgCake} alt="Torta Especial" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- SECTION 6: SEDES -->
+		<section id="sedes" class="locations pattern-rombo">
+			<div class="wrap">
+				<div class="section-header reveal centered-header">
+					<span class="eyebrow">Visítanos</span>
+					<h2>Nuestras Sedes</h2>
+				</div>
+
+				<div class="location-content reveal split-layout">
+					<div class="city-pane active" id="pane-cali">
+						<div class="location-list">
+							<div class="loc-card standout">
+								<div class="loc-info">
+									<h4>Sede Principal Cali</h4>
+									<p>Avenida Sexta #46N - 49</p>
+								</div>
+								<a
+									href="/ejemplo-villa-eucalipto-y-romero-glamping/pedido"
+									class="btn-micro vino-btn">Pide ahora</a
+								>
+							</div>
+						</div>
+						<div class="map-frame">
+							<iframe
+								src="https://www.google.com/maps?q=Panader%C3%ADa%20danny tortas%20Cali&output=embed"
+								loading="lazy"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<BakeryFooter />
+</BakeryLayout>
+
+<script>
+	// Typewriter animation for buttons
+	const words = [
+		"Personalizadas",
+		"Frías",
+		"Todos los tamaños",
+		"Ponqué",
+		"Para fiestas",
+	];
+	const btn = document.getElementById("typewriter-btn") as HTMLElement;
+	let wordIndex = 0;
+	let charIndex = 0;
+	let isDeleting = false;
+	let pauseTimer: ReturnType<typeof setTimeout>;
+
+	function typeStep() {
+		const current = words[wordIndex];
+		if (!isDeleting) {
+			btn.textContent = current.substring(0, charIndex + 1);
+			charIndex++;
+			if (charIndex === current.length) {
+				pauseTimer = setTimeout(() => {
+					isDeleting = true;
+					typeStep();
+				}, 1000);
+				return;
+			}
+		} else {
+			btn.textContent = current.substring(0, charIndex - 1);
+			charIndex--;
+			if (charIndex === 0) {
+				isDeleting = false;
+				wordIndex = (wordIndex + 1) % words.length;
+			}
+		}
+		setTimeout(typeStep, isDeleting ? 60 : 90);
+	}
+
+	if (btn) typeStep();
+
+	// Hero Typewriter
+	const heroText = "te las hacemos a ti";
+	const heroTarget = document.getElementById("hero-typewriter");
+	let heroCharIdx = 0;
+
+	function typeHero() {
+		if (heroTarget && heroCharIdx < heroText.length) {
+			heroTarget.textContent += heroText.charAt(heroCharIdx);
+			heroCharIdx++;
+			setTimeout(typeHero, 80);
+		}
+	}
+	if (heroTarget) setTimeout(typeHero, 500);
+</script>
 
 <style>
-	.section { padding: 5rem 0; }
-
-	/* Bienvenida */
-	.welcome-text {
-		text-align: center;
-		max-width: 780px;
-		margin: 0 auto;
-		font-size: 1.1rem;
-		line-height: 1.85;
-		color: #555;
+	section {
+		padding: 120px 0;
+		overflow: hidden;
 	}
 
-	.section-title { text-align: center; margin-bottom: 0.5rem; }
+	/* HERO STYLIZED */
+	.hero-stylized {
+		padding: 160px 0 0;
+		background:
+			radial-gradient(
+				ellipse at 80% 60%,
+				rgba(215, 154, 69, 0.35) 0%,
+				transparent 55%
+			),
+			radial-gradient(
+				ellipse at 20% 40%,
+				rgba(181, 82, 58, 0.06) 0%,
+				transparent 50%
+			),
+			var(--color-cream);
+		position: relative;
+	}
+	.hero-flex {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 60px;
+		padding-bottom: 80px;
+	}
+	.hero-left {
+		flex: 1;
+		text-align: left;
+	}
 
-	.section-subtitle {
+	.hero-wave {
+		width: 100%;
+		line-height: 0;
+		margin-bottom: -2px; /* Overlap with vinotinto */
+		position: relative;
+		z-index: 5;
+	}
+	.hero-wave svg {
+		display: block;
+		width: 100%;
+		height: 100px;
+	}
+	.hero-left h1 {
+		font-size: clamp(2.5rem, 6vw, 4.5rem);
+		margin-bottom: 32px;
+	}
+	.cursive-vino {
+		font-family: "Dancing Script", cursive;
+		color: #5a1111;
+		font-size: 0.6em;
+		display: inline-block;
+		margin-top: 4px;
+	}
+
+	.hero-right {
+		flex: 1.25;
+		position: relative;
+		min-height: 550px;
+		margin-bottom: -150px; /* Overlap with curve */
+		z-index: 10;
+	}
+
+	.hero-cta {
+		display: inline-block;
+		background: linear-gradient(to right, #7d0d0d, #b11c1c);
+		color: white;
+		padding: 18px 36px;
+		border-radius: 999px;
+		font-weight: 800;
+		font-size: 1.2rem;
+		text-decoration: none;
+		transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		box-shadow: 0 15px 30px rgba(125, 13, 13, 0.3);
+		margin-bottom: 48px;
+	}
+
+	.hero-cta:hover {
+		transform: scale(1.05) translateY(-3px);
+		box-shadow: 0 20px 40px rgba(125, 13, 13, 0.4);
+	}
+
+	.hero-cta:hover {
+		transform: scale(1.05) translateY(-3px);
+		box-shadow: 0 20px 40px rgba(125, 13, 13, 0.4);
+	}
+
+	.hero-right {
+		flex: 1.25;
+		position: relative;
+		min-height: 550px;
+	}
+
+	/* HERO PREMIUM VISUAL */
+	.hero-visual {
+		position: relative;
+		width: 100%;
+		max-width: 700px;
+		margin-left: auto;
+		z-index: 2;
+	}
+
+	.hero-backdrop-circle {
+		position: absolute;
+		right: -5%;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 110%;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		background: radial-gradient(
+			circle,
+			#eed9bf 0%,
+			#f1dfc8 60%,
+			transparent 85%
+		);
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.hero-visual img.hero-chef-img-large {
+		position: relative;
+		z-index: 5;
+		width: 170%; /* Even larger */
+		max-width: none;
+		margin-left: -40%;
+		margin-top: -10%;
+		height: auto;
+		display: block;
+		mix-blend-mode: multiply;
+		filter: drop-shadow(0 40px 100px rgba(100, 40, 0, 0.4)) brightness(1.05)
+			contrast(1.05);
+		transform-origin: bottom center;
+	}
+
+	.hero-glow-main {
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 150%;
+		height: 150%;
+		background: radial-gradient(
+			circle,
+			rgba(215, 154, 69, 0.28) 0%,
+			transparent 70%
+		);
+		z-index: -1;
+		pointer-events: none;
+		filter: blur(40px);
+	}
+
+	.hero-glow-secondary {
+		position: absolute;
+		top: 60%;
+		right: -10%;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient(
+			circle,
+			rgba(181, 82, 58, 0.08) 0%,
+			transparent 60%
+		);
+		z-index: -2;
+		pointer-events: none;
+		filter: blur(60px);
+	}
+
+	@keyframes float-main {
+		0%,
+		100% {
+			transform: translateY(0) rotate(0deg);
+		}
+		50% {
+			transform: translateY(-20px) rotate(1deg);
+		}
+	}
+
+	/* TORTAS REALES STYLES */
+	.real-cakes {
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+		gap: 40px;
+		margin-bottom: 40px;
+	}
+
+	.cake-item {
+		filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
+		animation: float-slow 5s ease-in-out infinite;
+	}
+
+	.cake-item.large {
+		font-size: 10rem;
+	}
+	.cake-item.small {
+		font-size: 6rem;
+		animation-delay: 1s;
+	}
+
+	@keyframes float-slow {
+		0%,
+		100% {
+			transform: translateY(0) rotate(0deg);
+		}
+		50% {
+			transform: translateY(-20px) rotate(5deg);
+		}
+	}
+
+	/* CAKE TEXTURE PATTERN */
+	.cake-texture {
+		position: relative;
+		background-color: var(--color-white);
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ctext x='10' y='40' font-size='20'%3E🎂%3C/text%3E%3C/svg%3E");
+		background-repeat: repeat;
+		background-size: 80px 80px;
+		background-blend-mode: overlay;
+	}
+
+	.cake-texture::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: rgba(255, 253, 248, 0.9); /* Soften the texture */
+		z-index: 0;
+	}
+
+	.cake-texture > div {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* TYPEWRITER CURSIVE BUTTON */
+	.typewriter-btn-wrapper {
+		margin-top: 36px;
+	}
+
+	.btn-cursiva {
+		display: inline-block;
+		min-width: 250px;
+		padding: 16px 0;
+		font-family: "Dancing Script", cursive;
+		font-size: 4rem; /* Even larger cursive */
+		font-weight: 700;
+		color: #5a1111; /* Vinotinto color */
+		background: transparent;
+		border: none;
+		text-decoration: none;
+		position: relative;
+		transition: color 0.3s ease;
+		cursor: pointer;
+		letter-spacing: 0.02em;
+	}
+
+	.btn-cursiva::after {
+		content: "|";
+		animation: blink 0.7s step-end infinite;
+		color: var(--color-berry);
+		margin-left: 2px;
+	}
+
+	@keyframes blink {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0;
+		}
+	}
+
+	.btn-cursiva:hover {
+		color: var(--color-berry);
+		border-bottom-color: var(--color-berry);
+	}
+
+	/* PHILOSOPHY - VINOTINTO THEME */
+	.philosophy-animated.vinotinto-theme {
+		background: #5a1111;
 		text-align: center;
+		color: var(--color-cream);
+		padding: 100px 0 0;
+		position: relative;
+		overflow: visible;
+	}
+	.vinotinto-theme h2 {
+		color: var(--color-cream);
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		line-height: 1.1;
+		margin-bottom: 24px;
+	}
+	.vinotinto-theme h2 span {
+		color: var(--color-gold-light);
+		font-size: 1.1em;
+	}
+	.vino-tag {
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		color: var(--color-gold-light);
+		font-size: 0.9rem;
+		margin-bottom: 24px;
+	}
+	.vino-sub {
+		font-size: 1.2rem;
+		color: rgba(251, 241, 225, 0.75);
+		font-weight: 500;
+		line-height: 1.8;
+		margin-top: 24px;
+	}
+
+	.centered-header {
+		text-align: center;
+		margin-bottom: 80px;
+	}
+
+	.centered-header .eyebrow {
+		display: block;
+		margin-bottom: 12px;
+	}
+
+	.split-layout {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	.split-layout .city-pane {
+		display: grid;
+		grid-template-columns: 1fr 1.5fr;
+		gap: 60px;
+		align-items: center;
+		position: relative;
+		z-index: 2;
+	}
+
+	.locations {
+		position: relative;
+	}
+	.pattern-rombo {
+		background-image:
+			linear-gradient(
+				135deg,
+				rgba(238, 217, 191, 0.4) 25%,
+				transparent 25%
+			),
+			linear-gradient(
+				225deg,
+				rgba(238, 217, 191, 0.4) 25%,
+				transparent 25%
+			),
+			linear-gradient(
+				45deg,
+				rgba(238, 217, 191, 0.4) 25%,
+				transparent 25%
+			),
+			linear-gradient(
+				315deg,
+				rgba(238, 217, 191, 0.4) 25%,
+				transparent 25%
+			);
+		background-position:
+			20px 0,
+			20px 0,
+			0 0,
+			0 0;
+		background-size: 40px 40px;
+		background-repeat: repeat;
+		mask-image: radial-gradient(circle, black 30%, transparent 90%);
+	}
+
+	@media (max-width: 980px) {
+		.split-layout .city-pane {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* Ola inferior del vinotinto */
+	.vino-wave-bottom {
+		width: 100%;
+		line-height: 0;
+		margin-top: 60px;
+		margin-bottom: -2px; /* kills the white line gap */
+		position: relative;
+		z-index: 5;
+	}
+	.vino-wave-bottom svg {
+		display: block;
+		width: 100%;
+		height: 100px;
+	}
+
+	/* PASTRY TEXTURE BG */
+	.special-moment {
+		position: relative;
+		overflow: hidden;
+	}
+	.pastry-bg {
+		position: absolute;
+		inset: 0;
+		font-size: 2.2rem;
+		line-height: 2.5rem;
+		word-break: break-all;
+		opacity: 0.07;
+		pointer-events: none;
+		z-index: 0;
+		overflow: hidden;
+		padding: 20px;
+	}
+	.special-moment .wrap {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* GALLERY EDITORIAL */
+	.editorial-gallery {
+		background: #f5ece0;
+		padding-top: 80px;
+	}
+	.gallery-header {
+		margin-bottom: 60px;
+	}
+	.gallery-header .subtitle {
+		font-weight: 700;
+		text-transform: uppercase;
+		color: var(--color-berry);
+		letter-spacing: 0.1em;
+	}
+
+	/* DOTS TEXTURE for section 3 */
+	.dots-bg {
+		background-image: radial-gradient(
+			circle,
+			rgba(90, 17, 17, 0.12) 2px,
+			transparent 2px
+		);
+		background-size: 28px 28px;
+		background-color: #f5ece0;
+	}
+
+	.editorial-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 40px;
+	}
+
+	/* Card shape A: tilted ribbon top */
+	.editorial-card {
+		background: var(--color-white);
+		padding: 0;
+		border-radius: 30px;
+		box-shadow: 0 12px 40px -8px rgba(58, 33, 23, 0.18);
+		transition:
+			transform 0.4s ease,
+			box-shadow 0.4s ease;
+		overflow: hidden;
+	}
+
+	.card-shape-a {
+		border-radius: 40px 8px 40px 8px;
+	}
+	.card-shape-b {
+		border-radius: 8px 40px 8px 40px;
+	}
+
+	.editorial-card:hover {
+		transform: translateY(-14px) rotate(-1deg);
+		box-shadow: 0 30px 60px -10px rgba(58, 33, 23, 0.22);
+	}
+	.card-shape-b:hover {
+		transform: translateY(-14px) rotate(1deg);
+	}
+
+	.card-footer {
+		padding: 20px 24px 24px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: var(--color-white);
+	}
+	.pedir-inline {
+		font-weight: 700;
+		color: var(--color-berry);
 		font-family: var(--font-display);
-		color: var(--color-gold);
-		font-size: 1.3rem;
-		font-style: italic;
-		margin-bottom: 3rem;
+		font-size: 0.9rem;
+		white-space: nowrap;
 	}
 
-	/* Mobile */
-	@media (max-width: 768px) {
-		.section { padding: 3.5rem 0; }
+	.img-wrapper {
+		position: relative;
+		overflow: hidden;
+		aspect-ratio: 1.15;
+	}
+	.img-wrapper img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.6s ease;
+	}
+	.editorial-card:hover img {
+		transform: scale(1.08);
+	}
+
+	.overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(90, 17, 17, 0.45);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+	.editorial-card:hover .overlay {
+		opacity: 1;
+	}
+
+	.view-btn {
+		background: var(--color-white);
+		color: #5a1111;
+		padding: 12px 28px;
+		border-radius: 999px;
+		font-weight: 700;
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		transition: background 0.2s;
+	}
+	.view-btn:hover {
+		background: var(--color-gold-light);
+	}
+
+	.editorial-card h3 {
+		margin: 0;
+		font-size: 1.35rem;
+		color: var(--color-brown);
+		font-weight: 700;
+	}
+
+	/* SPECIAL MOMENT (CURVY) */
+	.grid-2 {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 80px;
+		align-items: center;
+	}
+	.curvy-frame {
+		width: 100%;
+		aspect-ratio: 1;
+		overflow: hidden;
+		border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+		border: 12px solid var(--color-white);
+		box-shadow: var(--shadow);
+		animation: morph 8s ease-in-out infinite;
+	}
+	.curvy-frame img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@keyframes morph {
+		0%,
+		100% {
+			border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+		}
+		50% {
+			border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+		}
+	}
+
+	/* SEARCH CAKE */
+	.bday-box {
+		background: var(--color-brown-dark);
+		border-radius: var(--radius-lg);
+		padding: 80px;
+		display: flex;
+		align-items: center;
+		gap: 40px;
+		color: var(--color-cream);
+	}
+	.bday-text {
+		flex: 1;
+	}
+	.floating-cake {
+		font-size: 12rem;
+		animation: float 4s ease-in-out infinite;
+	}
+
+	/* LOCATIONS */
+	.loc-card {
+		background: var(--color-white);
+		padding: 32px;
+		border-radius: 24px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+		box-shadow: 0 10px 30px rgba(58, 33, 23, 0.08);
+	}
+	.loc-info {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+	.loc-info h4 {
+		font-size: 1.6rem;
+		color: var(--color-brown-dark);
+		margin: 0;
+	}
+	.loc-info p {
+		color: var(--color-brown-soft);
+		font-weight: 600;
+		margin: 0;
+	}
+
+	/* VINOTINTO BUTTON */
+	.vino-btn {
+		background: #5a1111;
+		color: var(--color-cream);
+		padding: 14px 32px;
+		border-radius: 999px;
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1rem;
+		transition: all 0.3s ease;
+	}
+	.vino-btn:hover {
+		background: #7a1a1a;
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgba(90, 17, 17, 0.3);
+	}
+
+	.city-pane {
+		display: none;
+		grid-template-columns: 1fr 1.5fr;
+		gap: 40px;
+	}
+	.city-pane.active {
+		display: grid;
+	}
+	.map-frame {
+		height: 480px;
+		border-radius: 30px;
+		overflow: hidden;
+		border: 8px solid white;
+		box-shadow: var(--shadow);
+	}
+	.map-frame iframe {
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+	@media (max-width: 980px) {
+		.grid-2,
+		.city-pane {
+			grid-template-columns: 1fr;
+			text-align: center;
+		}
+		.hero-clean {
+			padding-top: 140px;
+		}
+		.bday-box {
+			flex-direction: column;
+			padding: 40px 24px;
+		}
+		.map-frame {
+			height: 320px;
+		}
 	}
 </style>

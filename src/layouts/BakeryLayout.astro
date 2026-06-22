@@ -1,0 +1,57 @@
+---
+import "../styles/bakery.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Panadería danny tortas — Cali y Bogotá | Celebramos el buen comer",
+	description = "Panadería y pastelería en Cali y Bogotá: pan artesanal, fritos, tortas personalizadas, postres y desayunos frescos desde 1985.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="icon"
+			type="image/png"
+			href="/ejemplo-villa-eucalipto-y-romero-glamping/images/logo.png"
+		/>
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Dancing+Script:wght@600;700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<slot />
+
+		<script>
+			// Global Reveal on Scroll
+			const revealEls = document.querySelectorAll(".reveal");
+			const io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("in");
+							io.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.15 },
+			);
+			revealEls.forEach((el) => io.observe(el));
+		</script>
+	</body>
+</html>

@@ -1,0 +1,288 @@
+---
+import BakeryLayout from "../layouts/BakeryLayout.astro";
+import BakeryHeader from "../components/BakeryHeader.astro";
+import BakeryFooter from "../components/BakeryFooter.astro";
+---
+
+<BakeryLayout title="Pide en línea — Panaderías danny tortas">
+	<BakeryHeader />
+
+	<main class="order-page cake-texture">
+		<section class="order-hero reveal">
+			<div class="wrap min-height-center">
+				<div class="selection-container">
+					<h1 class="page-title">
+						¿Cómo quieres <span>tu pedido?</span>
+					</h1>
+
+					<div class="order-options">
+						<!-- WhatsApp Option -->
+						<a
+							href="https://wa.me/573000000000"
+							class="order-card"
+							target="_blank"
+						>
+							<div class="card-icon">💬</div>
+							<h3>
+								Pedir tu domicilio<br /><span
+									>por WhatsApp</span>
+							</h3>
+							<p>Atención personalizada inmediata</p>
+						</a>
+
+						<!-- App Option -->
+						<a
+							href="https://panaderiadanny tortas.com/pide-en-linea/"
+							class="order-card"
+							target="_blank"
+						>
+							<div class="card-icon">📱</div>
+							<h3>A través de<br /><span>la App</span></h3>
+							<p>Pide directo desde nuestra web</p>
+						</a>
+					</div>
+
+					<div class="external-delivery-large">
+						<h2 class="large-delivery-title">Pide también por:</h2>
+						
+						<!-- Rappi -->
+						<div class="delivery-hero-box rappi-theme">
+							<img
+								src="/ejemplo-villa-eucalipto-y-romero-glamping/images/rappi-logo-large.png"
+								alt="Rappi Logo"
+								class="delivery-big-logo"
+							/>
+							<a
+								href="https://www.rappi.com.co/"
+								target="_blank"
+								class="btn-delivery-order"
+								>Pedir por Rappi →</a
+							>
+						</div>
+
+						<!-- DiDi Food -->
+						<div class="delivery-hero-box didi-theme">
+							<img
+								src="/ejemplo-villa-eucalipto-y-romero-glamping/images/didi-food-logo.png"
+								alt="DiDi Food Logo"
+								class="delivery-big-logo"
+							/>
+							<a
+								href="https://food.didiglobal.com/"
+								target="_blank"
+								class="btn-delivery-order"
+								>Pedir por DiDi Food →</a
+							>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<BakeryFooter />
+</BakeryLayout>
+
+<style>
+	.order-page {
+		min-height: 100vh;
+		padding-top: 120px;
+		background-color: #f5ece0; /* Nude background */
+		position: relative;
+	}
+
+	/* TORTICA TEXTURE */
+	.cake-texture {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ctext x='10' y='40' font-size='20'%3E🎂%3C/text%3E%3C/svg%3E");
+		background-repeat: repeat;
+		background-size: 80px 80px;
+		background-blend-mode: overlay;
+	}
+
+	.wrap.min-height-center {
+		min-height: calc(100vh - 200px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		z-index: 2;
+	}
+
+	.selection-container {
+		max-width: 800px;
+		width: 100%;
+		text-align: center;
+	}
+
+	.page-title {
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		margin-bottom: 60px;
+		color: var(--color-brown-dark);
+	}
+
+	.page-title span {
+		color: var(--color-gold);
+	}
+
+	.order-options {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 30px;
+		margin-bottom: 80px;
+	}
+
+	.order-card {
+		background: var(--color-white);
+		padding: 40px 30px;
+		border-radius: 24px;
+		box-shadow: 0 20px 40px rgba(58, 33, 23, 0.1);
+		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		border: 2px solid transparent;
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.order-card:hover {
+		transform: translateY(-15px) scale(1.02);
+		border-color: var(--color-gold);
+		box-shadow: 0 30px 60px rgba(58, 33, 23, 0.15);
+	}
+
+	.card-icon {
+		font-size: 3.5rem;
+		margin-bottom: 24px;
+	}
+
+	.order-card h3 {
+		font-size: 1.5rem;
+		margin-bottom: 12px;
+		line-height: 1.2;
+	}
+
+	.order-card h3 span {
+		color: var(--color-berry);
+	}
+
+	.order-card p {
+		color: var(--color-brown-soft);
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+
+	.external-delivery {
+		margin-top: 40px;
+	}
+
+	.external-delivery {
+		margin-top: 40px;
+	}
+
+	.delivery-badge {
+		text-decoration: none;
+	}
+
+	.delivery-label {
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-brown-soft);
+		margin-bottom: 24px;
+		font-size: 0.85rem;
+	}
+
+	.delivery-logos {
+		display: flex;
+		justify-content: center;
+		gap: 24px;
+		align-items: center;
+	}
+
+	.delivery-badge {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 14px 28px;
+		border-radius: 16px;
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.1rem;
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
+		cursor: pointer;
+	}
+
+	.delivery-badge:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+	}
+
+	.large-delivery-title {
+		font-size: 2.5rem;
+		color: var(--color-brown-dark);
+		margin-bottom: 40px;
+	}
+
+	.delivery-hero-box {
+		padding: 60px;
+		border-radius: 40px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 30px;
+		margin-bottom: 30px;
+		transition: transform 0.3s ease;
+	}
+
+	.delivery-hero-box:hover {
+		transform: translateY(-5px);
+	}
+
+	.rappi-theme {
+		background: #ff441f;
+		box-shadow: 0 20px 50px rgba(255, 68, 31, 0.3);
+	}
+
+	.didi-theme {
+		background: #ff8e00;
+		box-shadow: 0 20px 50px rgba(255, 142, 0, 0.3);
+	}
+
+	.delivery-big-logo {
+		width: 300px;
+		max-width: 80%;
+		height: auto;
+		filter: brightness(0) invert(1);
+	}
+
+	.btn-delivery-order {
+		background: white;
+		padding: 20px 40px;
+		border-radius: 999px;
+		font-weight: 800;
+		font-size: 1.3rem;
+		text-decoration: none;
+		transition: transform 0.3s ease;
+	}
+
+	.rappi-theme .btn-delivery-order { color: #ff441f; }
+	.didi-theme .btn-delivery-order { color: #ff8e00; }
+
+	.btn-delivery-order:hover {
+		transform: scale(1.05);
+	}
+	.badge-name {
+		letter-spacing: 0.5px;
+	}
+
+	@media (max-width: 600px) {
+		.order-options {
+			grid-template-columns: 1fr;
+		}
+		.order-page {
+			padding-top: 100px;
+		}
+	}
+</style>

@@ -11,7 +11,6 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://isarbelaez.github.io',
-  base: '/ejemplo-villa-eucalipto-y-romero-glamping',
   integrations: [mdx(), sitemap(), react()],
 
   vite: {

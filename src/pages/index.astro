@@ -1,85 +1,621 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Hero from '../components/Hero.astro';
-import AlojamientosSectionReact from '../components/AlojamientosSectionReact.tsx';
-import LuxuryPlanPromo from '../components/LuxuryPlanPromo.astro';
-import { getCollection } from 'astro:content';
+// Using the images generated
+const heroImage = "/assets/law_office_santiago_1782409980225.png";
+const abstractImage = "/assets/legal_abstract_gold_1782409991670.png";
 
-const allAlojamientos = await getCollection('alojamientos');
-allAlojamientos.sort((a, b) => a.data.orden - b.data.orden);
-
-const galleryItems = allAlojamientos.map(a => ({
-	id: a.id,
-	nombre: a.data.nombre,
-	imagen: a.data.imagen,
-	precio: a.data.precio,
-	jacuzzi: a.data.jacuzzi,
-	tipo: a.data.tipo,
-	capacidad: a.data.capacidad,
-	resumen: a.data.resumen,
-	amenidades: a.data.amenidades,
-}));
-
-const heroImage = "https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=80&w=2670&auto=format&fit=crop";
+const title = "Ulises Abogados - Soluciones Migratorias Premium";
+const description = "Obtén tu residencia en Chile y recupera tu AFP Garantizado. Blindaje Migratorio Express.";
 ---
 
-<MainLayout
-	title="Villa Eucalipto Y Romero | Glamping & Cabañas"
-	description="Glamping y cabañas en la naturaleza. Suites con jacuzzi, vistas panorámicas y experiencias de descanso inolvidables."
->
-	<!-- 1. HERO (full screen) -->
-	<Hero
-		title="Encuentra tu refugio"
-		subtitle="Donde la tranquilidad existe"
-		image={heroImage}
-	/>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={heroImage} />
 
-	<!-- 2. SEARCH BAR + GALLERY (React Interactive Component) -->
-	<AlojamientosSectionReact client:load alojamientos={galleryItems} pageSize={6} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #091642;
+            --primary-light: #1a2a6c;
+            --accent: #c59b27;
+            --accent-light: #e6c15a;
+            --success: #0a6c33;
+            --danger: #e11d1d;
+            --bg-site: #f8f9fa;
+            --text-main: #050d26;
+            --text-muted: #535c75;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.85);
+            --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
 
-	<!-- 3. BIENVENIDA -->
-	<section class="welcome section">
-		<div class="container" data-aos="fade-up">
-			<h2 class="section-title">Bienvenida a Villa Eucalipto y Romero</h2>
-			<p class="welcome-text">
-				Nuestra villa está pensada para brindarte una experiencia inolvidable. Cabañas y glampings
-				de lujo integrados con la naturaleza, donde cada detalle ha sido diseñado para tu máximo
-				confort. Desconéctate de la rutina y reconéctate con lo esencial en un ambiente de
-				sofisticación rústica.
-			</p>
-		</div>
-	</section>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-	<!-- 4. LUXURY PLANES PROMO -->
-	<LuxuryPlanPromo />
-</MainLayout>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-site);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-<style>
-	.section { padding: 5rem 0; }
+        /* Subtle Grain Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
 
-	/* Bienvenida */
-	.welcome-text {
-		text-align: center;
-		max-width: 780px;
-		margin: 0 auto;
-		font-size: 1.1rem;
-		line-height: 1.85;
-		color: #555;
-	}
+        .premium-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
 
-	.section-title { text-align: center; margin-bottom: 0.5rem; }
+        /* --- Header --- */
+        header {
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+        }
 
-	.section-subtitle {
-		text-align: center;
-		font-family: var(--font-display);
-		color: var(--color-gold);
-		font-size: 1.3rem;
-		font-style: italic;
-		margin-bottom: 3rem;
-	}
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-	/* Mobile */
-	@media (max-width: 768px) {
-		.section { padding: 3.5rem 0; }
-	}
-</style>
+        .logo span {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 300;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            color: var(--primary);
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 550px;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-subtitle strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .hero-visual {
+            position: absolute;
+            right: -10%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            height: 85vh;
+            z-index: 1;
+            border-radius: 40px 0 0 40px;
+            overflow: hidden;
+            box-shadow: -20px 40px 80px rgba(0,0,0,0.15);
+            animation: slideInRight 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            pointer-events: none;
+        }
+
+        .hero-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- Stats Block --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            overflow: hidden;
+            margin: 60px auto 0;
+            width: 100%;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+            box-shadow: var(--shadow-premium);
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-value.gold {
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* --- Solutions Section --- */
+        .solutions {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .solutions-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .solution-card {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: var(--shadow-premium);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
+        }
+
+        .solution-card::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, transparent 70%, rgba(197, 155, 39, 0.05));
+            pointer-events: none;
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            background: #f0f2f8;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .solution-card:hover .card-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .card-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .card-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .card-body {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            flex-grow: 1;
+        }
+
+        .card-btn {
+            padding: 18px 32px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            display: inline-block;
+            width: fit-content;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .card-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            box-shadow: 0 10px 25px rgba(9, 22, 66, 0.3);
+        }
+
+        /* --- Urgent Section --- */
+        .urgent-section {
+            background: var(--primary);
+            border-radius: 60px;
+            padding: 80px;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            color: white;
+        }
+
+        .urgent-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("/assets/legal_abstract_gold_1782409991670.png");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            mix-blend-mode: luminosity;
+        }
+
+        .urgent-badge {
+            background: var(--danger);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 6px;
+            font-weight: 900;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .urgent-content {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .urgent-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .urgent-text {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .btn-urgent {
+            background: var(--danger);
+            color: white;
+            font-size: 1.5rem;
+            padding: 25px 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(225, 29, 29, 0.3);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateY(-50%) translateX(100px); opacity: 0; }
+            to { transform: translateY(-50%) translateX(0); opacity: 1; }
+        }
+
+        @keyframes scrollTestimonials {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-350px * 3 - 30px * 3)); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-title { font-size: 3.5rem; }
+            .hero-visual { width: 50%; opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            .premium-container { padding: 0 20px; }
+            .hero { padding-top: 150px; text-align: center; }
+            .hero-content { max-width: 100%; }
+            .hero-visual { display: none; }
+            .solutions-grid { grid-template-columns: 1fr; }
+            .urgent-section { flex-direction: column; padding: 40px 20px; border-radius: 30px; text-align: center; }
+            .urgent-title { font-size: 2.5rem; }
+            .hero-title { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            ULISES <span>Abogados</span>
+        </a>
+        <button class="card-btn btn-primary" style="padding: 12px 24px; font-size: 0.8rem;">Contacto Urgente</button>
+    </header>
+
+    <main class="premium-container">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">Expertos en Derecho Migratorio</div>
+                <h1 class="hero-title" style="text-transform: uppercase; font-size: 5rem; letter-spacing: -2px;">OBTÉN TU RESIDENCIA EN CHILE Y <span style="color: var(--accent);">RECUPERA TU AFP</span> GARANTIZADO</h1>
+                <p class="hero-subtitle" style="font-size: 1.4rem; max-width: 600px;">
+                    El <strong>Sistema de Blindaje Migratorio Express</strong> que garantiza tu estancia legal y el retiro de tus fondos de AFP. <br>
+                    <strong style="color: var(--danger); display: block; margin-top: 15px; font-size: 1.2rem;">Garantía 100% devolución si fallamos.</strong>
+                </p>
+
+                <div class="cta-group">
+                    <button class="card-btn btn-urgent" style="font-size: 1.5rem; padding: 30px 60px; width: 100%; max-width: 650px; box-shadow: 0 15px 30px rgba(225, 29, 29, 0.3);">
+                        SOLICITAR ASESORÍA GRATUITA
+                    </button>
+                    <p style="font-size: 1.1rem; color: var(--danger); margin-top: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">
+                        Valorada en 100.000 · CUPOS LIMITADOS
+                    </p>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <img src={heroImage} alt="Santiago Law Office" />
+            </div>
+        </section>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-value gold">$250M+</span>
+                <span class="stat-label">AFP Recuperados</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">75+</span>
+                <span class="stat-label">Casos Ganados CS</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">82%</span>
+                <span class="stat-label">Éxito Certificado</span>
+            </div>
+        </div>
+
+        <!-- Solutions Section -->
+        <section class="solutions">
+            <div class="solutions-grid">
+                <!-- Nacionalidad -->
+                <article class="solution-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                    </div>
+                    <div class="card-tag">Aceleración Legal</div>
+                    <h2 class="card-title">Acelera tu nacionalidad chilena</h2>
+                    <p class="card-body">
+                        Reducimos los tiempos de espera mediante gestiones administrativas de alto nivel. <strong>Garantía 100% devolución si fallamos.</strong> Acompañamiento total hasta tu cédula.
+                    </p>
+                    <button class="card-btn btn-primary">Agendar mi caso ahora</button>
+                </article>
+
+                <!-- AFP -->
+                <article class="solution-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M9 9h6M9 15h6"/></svg>
+                    </div>
+                    <div class="card-tag">Fondos Previsionales</div>
+                    <h2 class="card-title">RECUPERA TU DINERO DE LA AFP</h2>
+                    <p class="card-body">
+                        Recuperamos tus aportes incluso si ya has recibido rechazos. Operamos bajo el modelo de <strong>No Cobro si no hay Éxito</strong>. Tu dinero de vuelta en tus manos.
+                    </p>
+                    <button class="card-btn btn-primary" style="background: var(--success);">Recuperar mis fondos ya</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Urgent Section -->
+        <section class="urgent-section">
+            <div class="urgent-content">
+                <div class="urgent-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    ALERTA LEGAL 24/7
+                </div>
+                <h2 class="urgent-title">Frena tu orden de abandono inmediatamente</h2>
+                <p class="urgent-text">
+                    Detenemos órdenes de abandono en menos de 48 horas con medidas cautelares directas. <br>
+                    <strong>Garantía de devolución total</strong> si no logramos frenar la medida administrativa.
+                </p>
+                <button class="card-btn btn-urgent">Parar mi expulsión ahora</button>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-full" style="padding: 120px 0; background: var(--white); border-top: 1px solid rgba(0,0,0,0.03); margin-top: 80px;">
+            <div class="premium-container">
+                <div style="text-align: center; margin-bottom: 60px;">
+                    <div class="card-tag" style="margin-bottom: 15px;">Casos de Éxito</div>
+                    <h2 style="font-family: 'DM Serif Display', serif; font-size: 3.5rem; color: var(--primary); line-height: 1.1;">Historias que nos inspiran</h2>
+                </div>                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+                    {[
+                        { name: "Andrés R.", country: "Venezuela", text: "Recuperar mi AFP parecía imposible hasta que contacté a Ulises. Profesionalismo puro." },
+                        { name: "Lucía M.", country: "Colombia", text: "Mi orden de abandono fue frenada en menos de 24 horas. Les debo mi tranquilidad y mi permanencia en este país." },
+                        { name: "Marco S.", country: "Perú", text: "El proceso de nacionalidad fue mucho más rápido de lo que esperaba. Recomendados al 100% por su seriedad." }
+                    ].map((t) => (
+                        <div style="background: var(--bg-site); padding: 40px; border-radius: 25px; border: 1px solid rgba(0,0,0,0.02); transition: var(--transition); display: flex; flex-direction: column; box-shadow: var(--shadow-premium);">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; border: 2px solid var(--accent);">{t.name[0]}</div>
+                                <div>
+                                    <strong style="display: block; font-size: 1.1rem; color: var(--primary);">{t.name}</strong>
+                                    <span style="font-size: 0.8rem; color: var(--text-muted);">{t.country}</span>
+                                </div>
+                            </div>
+                            <p style="font-size: 1rem; color: var(--text-muted); line-height: 1.6; font-style: italic; flex-grow: 1;">
+                                "{t.text}"
+                            </p>
+                            <div style="margin-top: 20px; color: var(--accent); font-size: 0.9rem;">★★★★★</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Footer -->
+        <footer style="padding: 60px 0; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 60px;">
+            <div style="display: flex; gap: 40px; opacity: 0.6; filter: grayscale(1);">
+                <div style="font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Corte Suprema</div>
+                <div style="font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Registro Civil</div>
+                <div style="font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Sermig</div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script is:inline>
+        // Smooth scroll reveal logic
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.solution-card, .urgent-section').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(40px)";
+            el.style.transition = "all 0.8s cubic-bezier(0.23, 1, 0.32, 1)";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

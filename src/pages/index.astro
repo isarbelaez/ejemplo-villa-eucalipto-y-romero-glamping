@@ -138,19 +138,20 @@ const description = "Obtén tu residencia en Chile y recupera tu AFP Garantizado
 
         .hero-title {
             font-family: 'DM Serif Display', serif;
-            font-size: 4.5rem;
+            font-size: clamp(2.5rem, 8vw, 5rem);
             line-height: 1.1;
             color: var(--primary);
             margin-bottom: 30px;
             animation: fadeInUp 0.8s ease 0.2s forwards;
             opacity: 0;
+            letter-spacing: -1px;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             color: var(--text-muted);
             margin-bottom: 40px;
-            max-width: 550px;
+            max-width: 600px;
             animation: fadeInUp 0.8s ease 0.4s forwards;
             opacity: 0;
         }
@@ -198,6 +199,20 @@ const description = "Obtén tu residencia en Chile y recupera tu AFP Garantizado
             box-shadow: var(--shadow-premium);
             position: relative;
             z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                border-radius: 20px;
+            }
+            .stat-card {
+                padding: 20px;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            .stat-card:last-child {
+                border-bottom: none;
+            }
         }
 
         .stat-card {
@@ -445,13 +460,21 @@ const description = "Obtén tu residencia en Chile y recupera tu AFP Garantizado
 
         @media (max-width: 768px) {
             .premium-container { padding: 0 20px; }
-            .hero { padding-top: 150px; text-align: center; }
+            .logo { font-size: 1.2rem; }
+            header { padding: 20px; }
+            .hero { padding-top: 120px; text-align: center; min-height: auto; padding-bottom: 60px; }
             .hero-content { max-width: 100%; }
             .hero-visual { display: none; }
-            .solutions-grid { grid-template-columns: 1fr; }
-            .urgent-section { flex-direction: column; padding: 40px 20px; border-radius: 30px; text-align: center; }
-            .urgent-title { font-size: 2.5rem; }
-            .hero-title { font-size: 2.8rem; }
+            .solutions { padding: 60px 0; }
+            .solutions-grid { grid-template-columns: 1fr; gap: 20px; }
+            .solution-card { padding: 30px 20px; }
+            .card-title { font-size: 1.8rem; }
+            .urgent-section { flex-direction: column; padding: 40px 20px; border-radius: 30px; text-align: center; gap: 30px; }
+            .urgent-title { font-size: 2.2rem; }
+            .urgent-text { font-size: 1.1rem; }
+            .btn-urgent { padding: 20px; font-size: 1.2rem; }
+            .testimonials-full { padding: 60px 0; }
+            .testimonials-full h2 { font-size: 2.5rem !important; }
         }
     </style>
 </head>
@@ -470,10 +493,10 @@ const description = "Obtén tu residencia en Chile y recupera tu AFP Garantizado
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-badge">Expertos en Derecho Migratorio</div>
-                <h1 class="hero-title" style="text-transform: uppercase; font-size: 5rem; letter-spacing: -2px;">OBTÉN TU RESIDENCIA EN CHILE Y <span style="color: var(--accent);">RECUPERA TU AFP</span> GARANTIZADO</h1>
-                <p class="hero-subtitle" style="font-size: 1.4rem; max-width: 600px;">
+                <h1 class="hero-title" style="text-transform: uppercase;">OBTÉN TU RESIDENCIA EN CHILE Y <span style="color: var(--accent);">RECUPERA TU AFP</span> GARANTIZADO</h1>
+                <p class="hero-subtitle">
                     El <strong>Sistema de Blindaje Migratorio Express</strong> que garantiza tu estancia legal y el retiro de tus fondos de AFP. <br>
-                    <strong style="color: var(--danger); display: block; margin-top: 15px; font-size: 1.2rem;">Garantía 100% devolución si fallamos.</strong>
+                    <strong style="color: var(--danger); display: block; margin-top: 15px; font-weight: 800;">Garantía 100% devolución si fallamos.</strong>
                 </p>
 
                 <div class="cta-group">

@@ -1,0 +1,82 @@
+<header class="main-header">
+  <div class="floating-nav">
+    <a href="/" class="logo-link">
+      <img
+        src="/ejemplo-villa-eucalipto-y-romero-glamping/images/logo.png"
+        alt="danny tortas"
+      />
+    </a>
+    <nav class="nav-links">
+      <a href="#delicias">Delicias</a>
+      <a href="#sedes">Sedes</a>
+      <a
+        href="/ejemplo-villa-eucalipto-y-romero-glamping/pedido"
+        class="pide-btn">Pide ahora</a
+      >
+    </nav>
+  </div>
+</header>
+
+<style>
+  .main-header {
+    position: fixed;
+    top: 24px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .floating-nav {
+    pointer-events: auto;
+    background: rgba(251, 241, 225, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(83, 48, 32, 0.1);
+    padding: 8px 12px 8px 20px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    box-shadow: 0 20px 40px -10px rgba(58, 33, 23, 0.2);
+  }
+
+  .logo-link img {
+    height: 50px;
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-links a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-brown);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .pide-btn {
+    background: #5a1111;
+    color: #fbf1e1 !important;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 0.85rem !important;
+  }
+
+  @media (max-width: 600px) {
+    .floating-nav {
+      gap: 16px;
+      padding: 6px 8px 6px 14px;
+    }
+    .nav-links a:not(.pide-btn) {
+      display: none;
+    }
+  }
+</style>
